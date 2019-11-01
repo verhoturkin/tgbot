@@ -1,1 +1,1 @@
-bot: java -jar build/libs/tgbot-0.0.1-SNAPSHOT.jar
+bot: java -jar target/tgbot-0.0.1-SNAPSHOT.jar
