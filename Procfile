@@ -1,1 +1,1 @@
-worker: sh target/bin/tgbot
+bot: java -jar build/libs/tgbot-0.0.1-SNAPSHOT.jar
