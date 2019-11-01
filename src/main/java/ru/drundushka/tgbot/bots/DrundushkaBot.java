@@ -14,10 +14,10 @@ import java.util.List;
 
 @Component
 public class DrundushkaBot extends TelegramLongPollingBot {
-    @Autowired
-    ApplicationArguments args;
-
-    private List<String> nonOptionArgs = args.getNonOptionArgs();
+//    @Autowired
+//    ApplicationArguments args;
+//
+//    private List<String> nonOptionArgs = args.getNonOptionArgs();
 
     @Override
     public void onUpdateReceived(Update update) {
@@ -44,11 +44,11 @@ public class DrundushkaBot extends TelegramLongPollingBot {
 
     @Override
     public String getBotUsername() {
-        return nonOptionArgs.get(0);
+        return System.getenv("name");
     }
 
     @Override
     public String getBotToken() {
-        return nonOptionArgs.get(1);
+        return System.getenv("token");
     }
 }

@@ -1,1 +1,1 @@
-worker: sh target/bin/drundushka
+worker: sh target/bin/tgbot
