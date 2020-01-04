@@ -1,10 +1,18 @@
 package ru.drundushka.tgbot.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 
 @MappedSuperclass
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Access(AccessType.FIELD)
 public class AbstractBaseEntity {
     public static final int START_SEQ = 1000;
@@ -13,21 +21,6 @@ public class AbstractBaseEntity {
     @SequenceGenerator(name = "global_seq", sequenceName = "global_seq", allocationSize = 1, initialValue = START_SEQ)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seq")
     protected Integer id;
-
-    protected AbstractBaseEntity(Integer id) {
-        this.id = id;
-    }
-
-    protected AbstractBaseEntity() {
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public boolean isNew() {
         return this.id == null;

@@ -35,7 +35,8 @@ public class StopCommand extends BotCommand {
                         user.getFirstName(),
                         user.getLastName(),
                         user.getUserName(),
-                        true));
+                        true,
+                        0));
 
         if (current.isNew()) {
             answer.setText(String.format(UNREG, user.getFirstName()));

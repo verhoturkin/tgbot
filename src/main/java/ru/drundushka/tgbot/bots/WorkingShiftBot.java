@@ -1,26 +1,37 @@
 package ru.drundushka.tgbot.bots;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.telegram.telegrambots.extensions.bots.commandbot.TelegramLongPollingCommandBot;
+import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import ru.drundushka.tgbot.commands.StartCommand;
-import ru.drundushka.tgbot.commands.StopCommand;
 
 @Component
-public class WorkingShiftBot extends TelegramLongPollingCommandBot {
+public class WorkingShiftBot extends TelegramLongPollingBot {
 
-    public static final String NAME = "WorkingShiftBot";
+    private static final String NAME = "WorkingShiftBot";
 
-    @Autowired
-    public WorkingShiftBot(StartCommand startCommand,
-                           StopCommand stopCommand) {
-        super(NAME);
-        register(startCommand);
-        register(stopCommand);
+    private State currentState;
+
+    private enum State {
+        UNREGISTRED(0),
+        REGISTRED(1),
+        STARTED(2),
+        STOPPED(3);
+
+        int code;
+
+        State(int code) {
+            this.code = code;
+        }
+    }
+
+    @Override
+    public void onUpdateReceived(Update update) {
+    }
+
+    @Override
+    public String getBotUsername() {
+        return NAME;
     }
 
     @Override
@@ -28,26 +39,11 @@ public class WorkingShiftBot extends TelegramLongPollingCommandBot {
         return BotConfig.getToken(NAME);
     }
 
-    @Override
-    public void processNonCommandUpdate(Update update) {
-        if (update.hasMessage()) {
-            Message message = update.getMessage();
-            if (message.hasText()) {
-                String text = message.getText();
-                try {
-                    execute(sendMsg(update.getMessage().getChatId().toString(), text));
-                } catch (TelegramApiException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
     private synchronized SendMessage sendMsg(String chatId, String s) {
-        SendMessage sendMessage = new SendMessage();
-        sendMessage.enableMarkdown(true);
-        sendMessage.setChatId(chatId);
-        sendMessage.setText(s);
+        SendMessage sendMessage = new SendMessage()
+                .enableMarkdown(true)
+                .setChatId(chatId)
+                .setText(s);
         return sendMessage;
     }
 }

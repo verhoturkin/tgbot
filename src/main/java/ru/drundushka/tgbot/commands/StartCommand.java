@@ -36,7 +36,8 @@ public class StartCommand extends BotCommand {
                         user.getFirstName(),
                         user.getLastName(),
                         user.getUserName(),
-                        true));
+                        true,
+                        0));
 
         if (current.isNew()) {
             repository.save(current);
