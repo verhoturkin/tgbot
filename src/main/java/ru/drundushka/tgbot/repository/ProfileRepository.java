@@ -9,6 +9,6 @@ import java.util.Optional;
 @Repository
 public interface ProfileRepository extends JpaRepository<Profile, Integer> {
 
-    Optional<Profile> findByTgId(int id);
+    Profile findByTgId(int id);
 
 }
