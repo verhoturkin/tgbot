@@ -1,27 +1,27 @@
-DROP TABLE IF EXISTS ws.shifts;
-DROP TABLE IF EXISTS ws.users;
-DROP SEQUENCE IF EXISTS ws.global_seq;
+DROP TABLE IF EXISTS shifts;
+DROP TABLE IF EXISTS users;
+DROP SEQUENCE IF EXISTS global_seq;
 
-CREATE SEQUENCE ws.global_seq START WITH 1000;
+CREATE SEQUENCE global_seq START WITH 1000;
 
-CREATE TABLE ws.users
+CREATE TABLE users
 (
-    id        INTEGER PRIMARY KEY DEFAULT nextval('ws.global_seq'),
+    id        INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
     tg_id     INTEGER NOT NULL,
     name      VARCHAR NOT NULL,
     last_name VARCHAR,
     username  VARCHAR,
     enabled   BOOL                DEFAULT TRUE NOT NULL,
-    state     INTEGER NOT NULL    DEFAULT 1
+    state     INTEGER             DEFAULT 1    NOT NULL
 );
-CREATE UNIQUE INDEX users_tg_id_idx ON ws.users (tg_id);
+CREATE UNIQUE INDEX users_tg_id_idx ON users (tg_id);
 
-CREATE TABLE ws.shifts
+CREATE TABLE shifts
 (
-    id      INTEGER PRIMARY KEY DEFAULT nextval('ws.global_seq'),
+    id      INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
     user_id INTEGER                           NOT NULL,
     date    DATE                DEFAULT now() NOT NULL,
     start   TIME                DEFAULT now() NOT NULL,
     stop    TIME                              NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES ws.users (id) ON DELETE CASCADE
-)
+    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+);
