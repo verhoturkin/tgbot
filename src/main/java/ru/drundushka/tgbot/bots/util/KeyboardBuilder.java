@@ -1,4 +1,4 @@
-package ru.drundushka.tgbot.bots.utils;
+package ru.drundushka.tgbot.bots.util;
 
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
@@ -33,6 +33,7 @@ public class KeyboardBuilder {
 
     public ReplyKeyboardMarkup build() {
         return markup.setKeyboard(keyboard)
-                .setOneTimeKeyboard(false);
+                .setOneTimeKeyboard(false)
+                .setResizeKeyboard(true);
     }
 }

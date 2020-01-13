@@ -30,14 +30,14 @@ public class StartCommand extends BotCommand {
         SendMessage answer = new SendMessage();
         answer.setChatId(chat.getId().toString());
 
-        Profile current = repository.findByTgId(user.getId())
-                .orElse(new Profile(null,
-                        user.getId(),
-                        user.getFirstName(),
-                        user.getLastName(),
-                        user.getUserName(),
-                        true,
-                        0));
+        Profile current = repository.findByTgId(user.getId());
+//                .orElse(new Profile(null,
+//                        user.getId(),
+//                        user.getFirstName(),
+//                        user.getLastName(),
+//                        user.getUserName(),
+//                        true,
+//                        0));
 
         if (current.isNew()) {
             repository.save(current);

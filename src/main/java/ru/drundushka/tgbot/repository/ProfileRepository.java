@@ -11,4 +11,6 @@ public interface ProfileRepository extends JpaRepository<Profile, Integer> {
 
     Profile findByTgId(int id);
 
+    int findStateByTgId(int id);
+
 }

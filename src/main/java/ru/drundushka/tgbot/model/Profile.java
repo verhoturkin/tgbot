@@ -43,4 +43,14 @@ public class Profile extends AbstractBaseEntity {
         this.enabled = enabled;
         this.state = state;
     }
+
+    public Profile(int tgId, String name, String lastName, String userName) {
+        super(null);
+        this.tgId = tgId;
+        this.name = name;
+        this.lastName = lastName;
+        this.userName = userName;
+        this.enabled = true;
+        this.state = 1;
+    }
 }

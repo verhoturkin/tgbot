@@ -29,14 +29,14 @@ public class StopCommand extends BotCommand {
         SendMessage answer = new SendMessage();
         answer.setChatId(chat.getId().toString());
 
-        Profile current = repository.findByTgId(user.getId())
-                .orElse(new Profile(null,
-                        user.getId(),
-                        user.getFirstName(),
-                        user.getLastName(),
-                        user.getUserName(),
-                        true,
-                        0));
+        Profile current = repository.findByTgId(user.getId());
+//                .orElse(new Profile(null,
+//                        user.getId(),
+//                        user.getFirstName(),
+//                        user.getLastName(),
+//                        user.getUserName(),
+//                        true,
+//                        0));
 
         if (current.isNew()) {
             answer.setText(String.format(UNREG, user.getFirstName()));
